@@ -7,6 +7,7 @@ const app = express();
 
 app.use(cors());
 
+//initializes an Express server to listen on port 8081
 app.listen (8081,()=>{console.log("listening");
 })
 

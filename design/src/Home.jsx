@@ -9,8 +9,7 @@ function Home (){
         .catch (err=>console.log(err));
     }, {})
     return (
-        <>   
-        </>
+    <></>
     )
     }
     export default Home

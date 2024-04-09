@@ -2,41 +2,36 @@ import express from "express" ;
 import mysql from "mysql2" ;
 import cors from "cors";
 
-// Create a MySQL connection pool
-const pool = mysql.createPool({
-  connectionLimit: 20,
-  host: "localhost",
-  user: "root",
-  password: "Mur@ngi02",
-  database: "test",
-  debug: false,
-});
-
 // Create the Express app
 const app = express();
 
-// Define your routes and middleware here
-app.use(express.json());
 app.use(cors());
 
+
+// Create a MySQL connection 
+const db= mysql.createPool({
+    connectionLimit: 20,
+    host: "localhost",
+    user: "root",
+    password: "Mur@ngi02",
+    database: "test",
+    
+  })
+
+
+// Get all books
 app.get("/", (req, res) => {
-    res.json("Hello, this is the backend");
-  });
+    const sql = "SELECT * FROM posts";
+    db.query(sql, (err, result) => {
+      if (err) return res.json ({Message :"Error inside server"});
+        return res.json(result);
+      })
+      
+    })
   
-  // Get all books
-  app.get("/books", (req, res) => {
-    const q = "SELECT * FROM posts";
-    pool.query(q, (err, data) => {
-      if (err) {
-        console.log(err);
-        return res.json(err);
-      }
-      return res.json(data);
-    });
-  });
 
 
-// Start the server
-app.listen(8800, () => {
-    console.log("Connected to the backend");
-  });
+
+//initializes an Express server to listen on port 8081
+app.listen (8081,()=>{console.log("listening");
+})

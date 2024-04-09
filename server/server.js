@@ -21,7 +21,7 @@ const db= mysql.createPool({
 
 // Get all books
 app.get("/", (req, res) => {
-    const sql = "SELECT * FROM test";
+    const sql = "SELECT * FROM posts";
     db.query(sql, (err, result) => {
       if (err) return res.json ({Message :"Error inside server"});
         return res.json(result);
